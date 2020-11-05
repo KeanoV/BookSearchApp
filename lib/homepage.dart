@@ -8,7 +8,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<BooksModel> filtered = [];
+  // List<BooksModel> _search = [];
+  // List<BooksModel> _list = [];
 
   Icon seaicon = Icon(Icons.search);
 
@@ -47,9 +48,7 @@ class _HomePageState extends State<HomePage> {
                       border: InputBorder.none,
                       hintText: "Search",
                     ),
-                    onChanged: (value) {
-                      setState(() {});
-                    },
+                    //onChanged: onSearch,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20.0,
@@ -72,7 +71,7 @@ class _HomePageState extends State<HomePage> {
               return ListView.builder(
                   itemCount: snapshot.data.items.length,
                   itemBuilder: (context, index) {
-                    var article = snapshot.data.items[index];
+                    var items = snapshot.data.items[index];
                     return Container(
                       height: 120,
                       margin: const EdgeInsets.all(8),
@@ -86,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                             child: AspectRatio(
                                 aspectRatio: 1,
                                 child: Image.network(
-                                  article.volumeInfo.imageLinks.thumbnail,
+                                  items.volumeInfo.imageLinks.thumbnail,
                                   fit: BoxFit.cover,
                                 )),
                           ),
@@ -96,14 +95,14 @@ class _HomePageState extends State<HomePage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  article.volumeInfo.title ?? "",
+                                  items.volumeInfo.title ?? "",
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  article.volumeInfo.description ?? "",
+                                  items.volumeInfo.description ?? "",
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
